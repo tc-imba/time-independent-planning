@@ -99,7 +99,7 @@ public:
   virtual bool isStable();
 
   // setting
-  static void setMT(std::mt19937* _MT) { MT = _MT; }
+  static void setMT(std::mt19937* __MT) { MT = __MT; }
   static void setG(Graph* _G) { G = _G; }
   static void setVerbose(bool flg) { verbose = flg; }
 

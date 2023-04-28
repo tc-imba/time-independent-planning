@@ -2,9 +2,9 @@
 
 Problem::Problem(Graph* _G,
                  Agents _A,
-                 std::mt19937* _MT,
+                 std::mt19937* __MT,
                  int _max_activation)
-  : G(_G), A(_A), MT(_MT), max_activation(_max_activation)
+  : G(_G), A(_A), MT(__MT), max_activation(_max_activation)
 {
   if (G->getV().size() <= A.size())
     halt("Problem::Problem", "#agent is over #node");

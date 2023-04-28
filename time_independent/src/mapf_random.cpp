@@ -5,9 +5,9 @@
 
 MAPF_RANDOM::MAPF_RANDOM(Graph* _G,
                          Agents _A,
-                         std::mt19937* _MT,
+                         std::mt19937* __MT,
                          int _max_activation)
-  : Problem(_G, _A, _MT, _max_activation)
+  : Problem(_G, _A, __MT, _max_activation)
 {
   // set starts and goals randomly
   setStartsGoalsRandomly();
@@ -16,9 +16,9 @@ MAPF_RANDOM::MAPF_RANDOM(Graph* _G,
 MAPF_RANDOM::MAPF_RANDOM(std::string scen,
                          Graph* _G,
                          Agents _A,
-                         std::mt19937* _MT,
+                         std::mt19937* __MT,
                          int _max_activation)
-  : Problem(_G, _A, _MT, _max_activation)
+  : Problem(_G, _A, __MT, _max_activation)
 {
   // set starts and goals
   readScenario(scen);

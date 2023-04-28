@@ -2,10 +2,10 @@
 
 MAPF_DP::MAPF_DP(Graph* _G,
                  Agents _A,
-                 std::mt19937* _MT,
+                 std::mt19937* __MT,
                  float _dp,
                  int _max_activation)
-  : MAPF_RANDOM(_G, _A, _MT, _max_activation),
+  : MAPF_RANDOM(_G, _A, __MT, _max_activation),
     delayProbMax(_dp)
 {
   init();
@@ -14,10 +14,10 @@ MAPF_DP::MAPF_DP(Graph* _G,
 MAPF_DP::MAPF_DP(std::string scen,
                  Graph* _G,
                  Agents _A,
-                 std::mt19937* _MT,
+                 std::mt19937* __MT,
                  float _dp,
                  int _max_activation)
-  : MAPF_RANDOM(scen, _G, _A, _MT, _max_activation),
+  : MAPF_RANDOM(scen, _G, _A, __MT, _max_activation),
     delayProbMax(_dp)
 {
   init();
