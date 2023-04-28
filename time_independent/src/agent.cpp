@@ -1,5 +1,6 @@
 #include "../include/agent.hpp"
 #include <iomanip>
+using namespace pibt;
 
 int Agent::cnt_id = 0;
 int Agent::cnt_activation = 0;

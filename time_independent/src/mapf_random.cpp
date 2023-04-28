@@ -2,6 +2,7 @@
 #include <regex>
 #include <fstream>
 #include "../include/stn.hpp"
+using namespace pibt;
 
 MAPF_RANDOM::MAPF_RANDOM(Graph* _G,
                          Agents _A,

@@ -1,4 +1,5 @@
 #include "../include/mapf_dp.hpp"
+using namespace pibt;
 
 MAPF_DP::MAPF_DP(Graph* _G,
                  Agents _A,

@@ -1,4 +1,5 @@
 #include "../include/greedy.hpp"
+using namespace pibt;
 
 Greedy::Greedy()
 {

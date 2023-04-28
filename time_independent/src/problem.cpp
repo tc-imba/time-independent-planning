@@ -1,4 +1,5 @@
 #include "../include/problem.hpp"
+using namespace pibt;
 
 Problem::Problem(Graph* _G,
                  Agents _A,

@@ -1,4 +1,5 @@
 #include "../include/causal_pibt.hpp"
+using namespace pibt;
 
 CausalPIBT::CausalPIBT() {}
 CausalPIBT::~CausalPIBT() {}

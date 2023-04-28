@@ -13,46 +13,54 @@
 #include "agent.hpp"
 #include <unordered_map>
 
-struct Event;
-using Events = std::vector<Event*>;
-using Realization = std::vector<Events>;
+namespace pibt {
 
-struct Event {
-  int id;           // event id
-  int t;            // timestep
-  State* s;         // agent's state
-  Events parents;   // parents, i.e., temporal dependencies
-  Event* earliest;  // used when finding minimum path
-};
+    struct Event;
+    using Events = std::vector<Event *>;
+    using Realization = std::vector<Events>;
 
-class STN {
-private:
-  Graph* G;  // graph
-  Agents A;  // agents
+    struct Event {
+        int id;           // event id
+        int t;            // timestep
+        State *s;         // agent's state
+        Events parents;   // parents, i.e., temporal dependencies
+        Event *earliest;  // used when finding minimum path
+    };
 
-  int elapsed;  // time (ms)
+    class STN {
+    private:
+        Graph *G;  // graph
+        Agents A;  // agents
 
-  int cnt_id;  // used for event id
-  Event* XF;   // initial events
-  Realization realization;  // MAPF execution
-  // register all events
-  std::unordered_map<int, Event*> event_table;
-  // distance to the initial event
-  std::unordered_map<int, int> event_dists;
+        int elapsed;  // time (ms)
 
-  void createDiagram();       // create space-time diagram
-  int getTimestep(Event* e);  // get earliest timestep
-  int getDist(Event* e);      // recursive func, used in getTimestep
-  void findRealization();     // get MAPF execution
-  static int edgeWeight(Event* child, Event* parent);  // used in getDist
-  static Events getLocalExec(Event* last_event);
-  static Events getLocalExecPos(Event* last_event);
+        int cnt_id;  // used for event id
+        Event *XF;   // initial events
+        Realization realization;  // MAPF execution
+        // register all events
+        std::unordered_map<int, Event *> event_table;
+        // distance to the initial event
+        std::unordered_map<int, int> event_dists;
 
-public:
-  STN(Graph* G, Agents _A);
-  ~STN();
+        void createDiagram();       // create space-time diagram
+        int getTimestep(Event *e);  // get earliest timestep
+        int getDist(Event *e);      // recursive func, used in getTimestep
+        void findRealization();     // get MAPF execution
+        static int edgeWeight(Event *child, Event *parent);  // used in getDist
+        static Events getLocalExec(Event *last_event);
 
-  int getMakespan();
-  int getSOC();
-  std::string strMAPFExecution();
-};
+        static Events getLocalExecPos(Event *last_event);
+
+    public:
+        STN(Graph *G, Agents _A);
+
+        ~STN();
+
+        int getMakespan();
+
+        int getSOC();
+
+        std::string strMAPFExecution();
+    };
+
+}

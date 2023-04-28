@@ -4,114 +4,137 @@
 #include "graph.hpp"
 #include "util.hpp"
 
-class Agent;
-using Agents = std::vector<Agent*>;
+namespace pibt {
 
-class Agent {
-public:
-  // mode
-  enum Mode { CONTRACTED, REQUESTING, EXTENDED };
+    class Agent;
 
-  // used for history
-  struct State {
-    int id;         // unique id
-    Mode mode;      // current mode
-    Mode pre_mode;  // mode before activation
-    Node* head;     // head
-    Node* tail;     // tail
-    Node* goal;     // goal
-  };
+    using Agents = std::vector<Agent *>;
 
-  // execution history
-  // space-time diagram, used to construct simple temporal network
-  static std::vector<std::vector<State*>> ST_DIAGRAM;
-  // store all configurations
-  static std::vector<std::vector<State*>> CONFIGURATIONS;
+    class Agent {
+    public:
+        // mode
+        enum Mode {
+            CONTRACTED, REQUESTING, EXTENDED
+        };
 
-private:
-  // interacted agents, reset for each activation
-  static Agents interacted_agents;
+        // used for history
+        struct State {
+            int id;         // unique id
+            Mode mode;      // current mode
+            Mode pre_mode;  // mode before activation
+            Node *head;     // head
+            Node *tail;     // tail
+            Node *goal;     // goal
+        };
 
-  // garbage collection
-  static std::vector<State*> GC_state;
+        // execution history
+        // space-time diagram, used to construct simple temporal network
+        static std::vector<std::vector<State *>> ST_DIAGRAM;
+        // store all configurations
+        static std::vector<std::vector<State *>> CONFIGURATIONS;
 
-protected:
-  static int cnt_id;             // for unique id
-  static int cnt_activation;     // number of activation
-  static std::mt19937* MT;       // seed
-  static Graph* G;               // graph
-  static Agents A;               // set of all agents
-  static bool is_initialized;    // whether agents are given initial locations
+    private:
+        // interacted agents, reset for each activation
+        static Agents interacted_agents;
 
-  static bool verbose;  // print additional info
+        // garbage collection
+        static std::vector<State *> GC_state;
 
-  // see "struct State""
-  int id;
-  Mode mode;
-  Mode pre_mode;
-  Node* head;
-  Node* tail;
-  Node* goal;
+    protected:
+        static int cnt_id;             // for unique id
+        static int cnt_activation;     // number of activation
+        static std::mt19937 *MT;       // seed
+        static Graph *G;               // graph
+        static Agents A;               // set of all agents
+        static bool is_initialized;    // whether agents are given initial locations
 
-  // activation function
-  virtual void actContracted();  // activated when mode = contracted
-  virtual void actRequesting();  // activated when mode = requesting
-  virtual void actExtended();    // activated when mode = extended
+        static bool verbose;  // print additional info
 
-  // register interacted agents
-  static void interacted(Agent* a);
+        // see "struct State""
+        int id;
+        Mode mode;
+        Mode pre_mode;
+        Node *head;
+        Node *tail;
+        Node *goal;
 
-  // whether a node v is occupied
-  static bool occupied(Node* v);
+        // activation function
+        virtual void actContracted();  // activated when mode = contracted
+        virtual void actRequesting();  // activated when mode = requesting
+        virtual void actExtended();    // activated when mode = extended
 
-  // return an agent on a node v
-  static Agent* onAgent(Node* v);
+        // register interacted agents
+        static void interacted(Agent *a);
 
-public:
-  Agent();
-  virtual ~Agent();
-  virtual void init(Node* v, Node* g = nullptr);
+        // whether a node v is occupied
+        static bool occupied(Node *v);
 
-  // call actContracted, actRequesting, or actExtended
-  void activate();
+        // return an agent on a node v
+        static Agent *onAgent(Node *v);
 
-  // getter
-  int getId() { return id; }
-  Mode getMode() { return mode; }
-  Mode getPreMode() { return pre_mode; }
-  Node* getHead() { return head; }
-  Node* getTail() { return tail; }
-  Node* getGoal() { return goal; }
-  State* getState();
-  static bool isInitialized() { return is_initialized; }
-  static int getCntActivation() { return cnt_activation; }
+    public:
+        Agent();
 
-  // setter
-  void setMode(Mode  _mode) { mode = _mode; }
-  void setHead(Node* _head) { head = _head; }
-  void setTail(Node* _tail) { tail = _tail; }
-  void setGoal(Node* _goal) { goal = _goal; }
+        virtual ~Agent();
 
-  bool operator==(Agent* a) const { return a->getId() == id; };
-  bool operator!=(Agent* a) const { return a->getId() != id; };
+        virtual void init(Node *v, Node *g = nullptr);
 
-  // used in MAPF-DP
-  virtual bool isStable();
+        // call actContracted, actRequesting, or actExtended
+        void activate();
 
-  // setting
-  static void setMT(std::mt19937* __MT) { MT = __MT; }
-  static void setG(Graph* _G) { G = _G; }
-  static void setVerbose(bool flg) { verbose = flg; }
+        // getter
+        int getId() { return id; }
 
-  // print current status
-  static void printState(State* s);
+        Mode getMode() { return mode; }
 
-  // mode name
-  static std::string getModeName(Mode mode);
+        Mode getPreMode() { return pre_mode; }
 
-  // for log
-  static std::string strAgent();
-};
+        Node *getHead() { return head; }
 
-using State = Agent::State;
-using States = std::vector<State*>;
+        Node *getTail() { return tail; }
+
+        Node *getGoal() { return goal; }
+
+        State *getState();
+
+        static bool isInitialized() { return is_initialized; }
+
+        static int getCntActivation() { return cnt_activation; }
+
+        // setter
+        void setMode(Mode _mode) { mode = _mode; }
+
+        void setHead(Node *_head) { head = _head; }
+
+        void setTail(Node *_tail) { tail = _tail; }
+
+        void setGoal(Node *_goal) { goal = _goal; }
+
+        bool operator==(Agent *a) const { return a->getId() == id; };
+
+        bool operator!=(Agent *a) const { return a->getId() != id; };
+
+        // used in MAPF-DP
+        virtual bool isStable();
+
+        // setting
+        static void setMT(std::mt19937 *__MT) { MT = __MT; }
+
+        static void setG(Graph *_G) { G = _G; }
+
+        static void setVerbose(bool flg) { verbose = flg; }
+
+        // print current status
+        static void printState(State *s);
+
+        // mode name
+        static std::string getModeName(Mode mode);
+
+        // for log
+        static std::string strAgent();
+    };
+
+    using State = Agent::State;
+    using States = std::vector<State *>;
+
+}

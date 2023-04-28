@@ -5,22 +5,28 @@
 #pragma once
 #include "agent.hpp"
 
+namespace pibt {
 
-class FSP : public Agent {
- private:
-  const Path plan;  // mapf plan
-  int t;            // internal clock
+    class FSP : public Agent {
+    private:
+        const Path plan;  // mapf plan
+        int t;            // internal clock
 
-  void actContracted();
-  void actExtended();
+        void actContracted();
 
-  void init(Node* v, Node* g = nullptr);
-  Node* nextNode();
+        void actExtended();
 
- public:
-  FSP(Nodes _plan);
-  ~FSP();
+        void init(Node *v, Node *g = nullptr);
 
-  bool isStable();  // for MAPF-DP
-  int getT() { return t; }  // used for synchronization
-};
+        Node *nextNode();
+
+    public:
+        FSP(Nodes _plan);
+
+        ~FSP();
+
+        bool isStable();  // for MAPF-DP
+        int getT() { return t; }  // used for synchronization
+    };
+
+}

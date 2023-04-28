@@ -5,17 +5,23 @@
 #pragma once
 #include "causal_pibt.hpp"
 
+namespace pibt {
 
-class CausalPIBT_MAPF : public CausalPIBT {
- private:
-  Path plan;  // internal plan
-  int t;      // internal clock
+    class CausalPIBT_MAPF : public CausalPIBT {
+    private:
+        Path plan;  // internal plan
+        int t;      // internal clock
 
-  void actExtended();
-  void init(Node* v, Node* g = nullptr);
-  Node* nextNode();
+        void actExtended();
 
- public:
-  CausalPIBT_MAPF(Nodes _plan);
-  ~CausalPIBT_MAPF();
-};
+        void init(Node *v, Node *g = nullptr);
+
+        Node *nextNode();
+
+    public:
+        CausalPIBT_MAPF(Nodes _plan);
+
+        ~CausalPIBT_MAPF();
+    };
+
+}

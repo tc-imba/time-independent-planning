@@ -1,4 +1,5 @@
 #include "../include/stn.hpp"
+using namespace pibt;
 
 STN::STN(Graph* _G, Agents _A) : G(_G), A(_A)
 {

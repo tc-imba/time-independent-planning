@@ -1,4 +1,5 @@
 #include "../include/causal_pibt_mapf.hpp"
+using namespace pibt;
 
 CausalPIBT_MAPF::CausalPIBT_MAPF(Path _plan)
 {

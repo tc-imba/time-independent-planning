@@ -5,18 +5,22 @@
 #pragma once
 #include "agent.hpp"
 
+namespace pibt {
 
-class Greedy : public Agent {
-protected:
+    class Greedy : public Agent {
+    protected:
 
-  void init(Node* v, Node* g = nullptr);
+        void init(Node *v, Node *g = nullptr);
 
-  // see agent.cpp about actRequesting, actExtended
-  void actContracted();
+        // see agent.cpp about actRequesting, actExtended
+        void actContracted();
 
-  Node* nextNode();
+        Node *nextNode();
 
-public:
-  Greedy();
-  ~Greedy();
-};
+    public:
+        Greedy();
+
+        ~Greedy();
+    };
+
+}
