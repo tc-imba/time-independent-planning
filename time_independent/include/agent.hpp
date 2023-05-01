@@ -1,7 +1,8 @@
 #pragma once
+
 #include <random>
 #include <iomanip>
-#include "graph.hpp"
+#include "../../third_party/grid-pathfinding/graph/include/graph.hpp"
 #include "util.hpp"
 
 namespace pibt {
@@ -123,6 +124,15 @@ namespace pibt {
         static void setG(Graph *_G) { G = _G; }
 
         static void setVerbose(bool flg) { verbose = flg; }
+
+        static void reset() {
+            cnt_id = 0;
+            cnt_activation = 0;
+            is_initialized = false;
+            A.clear();
+            ST_DIAGRAM.clear();
+            CONFIGURATIONS.clear();
+        }
 
         // print current status
         static void printState(State *s);

@@ -3,7 +3,7 @@
  */
 
 #pragma once
-#include <graph.hpp>
+#include "../../third_party/grid-pathfinding/graph/include/graph.hpp"
 #include "agent.hpp"
 #include "util.hpp"
 

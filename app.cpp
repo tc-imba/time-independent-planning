@@ -11,6 +11,7 @@
 #include <mapf_random.hpp>
 #include <mapf_dp.hpp>
 #include <stn.hpp>
+using namespace pibt;
 
 /*
  * MAPF_RANDOM: pickup one agent randomly
